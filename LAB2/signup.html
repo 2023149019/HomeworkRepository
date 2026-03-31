@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>IP-MOVIE-PAGE</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <h1>INTERNET-PROGRAMMING MOVIE SITE에 오신 것을 환영합니다.</h1>
+    <div class="form_div">
+        <div class="link_div">회원가입 | <a href="login.html">로그인</a></div>
+        <form>
+        <p>
+            <!--이름(text), ID(text), 비밀번호(password), 성별(radio), 나이(number), 생일(date), 좋아하는 색(color), 이메일(email), 영화 관심도(range), 사이트 유입 경로(select)-->
+            <label>이름: <input type="text" autocomplete="name" required/></label>
+            <br/>
+            <label>ID: <input type="text" required/></label>
+            <br/>
+            <label>비밀번호: <input type="password" required/></label>
+            <br/>
+            <label>성별: <input type="radio" value="male" checked>남자</input> <input type="radio" value="female"> 여자 </input> </label>
+            <br/>
+            <label>나이: <input type="number" min="0" max="999" step="1"value="20"/>세</label>
+            <br/>
+            <label>생일: <input type="date" required/></label>
+            <br/>
+            <label>좋아하는 색: <input type="color"/></label>
+            <br/>
+            <label>이메일: <input type="email" placeholder="yourEmail@yourDomain" required/> </label>
+            <br/>
+            <label>영화 관심도: 0 <input type="range"> 10</label>
+            <br/>
+            <label>사이트 유입 경로: 
+                <select>
+                    <option>검색 엔진</option>
+                    <option>지인 추천</option>
+                    <option>SNS</option>
+                </select> 
+            </label>
+            <br/>
+        </p>
+        <p>
+            <input type="submit" class="green_button" value="SignUp"/>
+            <input type="submit" class="red_button" value="Clear" autofocus/>
+        </p>
+    </form>
+    </div>
+</body>
+</html>
