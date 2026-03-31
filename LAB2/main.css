@@ -31,10 +31,6 @@ form label{
     text-align: right;
 }
 
-label.small_label{
-    width: 150px;
-}
-
 
 input.green_button{
     width: 70px;
