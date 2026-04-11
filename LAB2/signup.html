@@ -14,21 +14,21 @@
             <!--이름(text), ID(text), 비밀번호(password), 성별(radio), 나이(number), 생일(date), 좋아하는 색(color), 이메일(email), 영화 관심도(range), 사이트 유입 경로(select)-->
             <label>이름: <input name="name" type="text" autocomplete="on" required/></label>
             <br/>
-            <label>ID: <input type="text" required/></label>
+            <label>ID: <input name="id" type="text" required/></label>
             <br/>
-            <label>비밀번호: <input type="password" required/></label>
+            <label>비밀번호: <input name="password" type="password" required/></label>
             <br/>
-            <label>성별: <input type="radio" value="male" checked>남자</input> <input type="radio" value="female"> 여자 </input> </label>
+            <label>성별: <input name="gender" type="radio" value="male" checked>남자</input> <input type="radio" value="female"> 여자 </input> </label>
             <br/>
-            <label>나이: <input type="number" min="0" max="999" step="1"value="20"/>세</label>
+            <label>나이: <input name="age" type="number" min="0" max="999" step="1"value="20"/>세</label>
             <br/>
-            <label>생일: <input type="date" required/></label>
+            <label>생일: <input name="birthday" type="date" required/></label>
             <br/>
-            <label>좋아하는 색: <input type="color"/></label>
+            <label>좋아하는 색: <input name="color" type="color"/></label>
             <br/>
-            <label>이메일: <input type="email" placeholder="yourEmail@yourDomain" required/> </label>
+            <label>이메일: <input name="mail" type="email" placeholder="yourEmail@yourDomain" required/> </label>
             <br/>
-            <label>영화 관심도: 0 <input type="range"> 10</label>
+            <label>영화 관심도: 0 <input name="interest" type="range"> 10</label>
             <br/>
             <label>사이트 유입 경로: 
                 <select>
@@ -40,8 +40,8 @@
             <br/>
         </p>
         <p>
-            <input type="submit" class="green_button" value="SignUp"/>
-            <input type="submit" class="red_button" value="Clear" autofocus/>
+            <input name="signup" type="submit" class="green_button" value="SignUp"/>
+            <input name="Clear" type="submit" class="red_button" value="Clear" autofocus/>
         </p>
     </form>
     </div>
