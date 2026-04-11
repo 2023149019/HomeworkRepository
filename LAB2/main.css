@@ -31,6 +31,10 @@ form label{
     text-align: right;
 }
 
+form label.radio_label {
+    display: inline;
+    text-align: left;
+}
 
 input.green_button{
     width: 70px;
