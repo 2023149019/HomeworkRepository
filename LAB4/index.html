@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP-MOVIE-PAGE HOME</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<div class="container_1020">
+    <h1>Welcome to IP-MOVIE-PAGE</h1>
+    <hr/>
+    <div class="nav">
+    <a href="index.html">메인페이지</a>
+    <a href="login.html">로그인</a>
+    <a href="signup.html">회원가입</a>
+    </div>
+    <hr/>
+    <div class="search_div">
+        <input id="keyword" type="text" class="search_text" placeholder="키워드를 입력하세요"/> 
+        <input id="filter" type="button" class="search_button" value="Filter results"/>
+    </div>
+    <h2 class="movies_title"> Movies </h2>
+    <hr/>
+    <div>
+        <div>
+            <b>정렬 기준</b>
+            <br/>
+            <label class="radio_label"><input name="order" type="radio" value="v_dec">평점 내림차순</label>
+            <label class="radio_label"><input name="order" type="radio" value="v_asc">평점 오름차순</label>
+            <label class="radio_label"><input name="order" type="radio" value="d_dec">개봉 내림차순</label>
+            <label class="radio_label"><input name="order" type="radio" value="d_asc">개봉 오름차순</label>
+        </div>
+        <hr/>
+        <div id="display" class="movies_contents"></div>
+        <script>
+            let Movies = [];
+            let filtered;
+            const page_size = 8;
+            let display = document.getElementById("display");
+            let loaded = 0;
+            function load_next_page()
+            {
+                let i = loaded;
+                loaded = Math.min(loaded + page_size, filtered.length);
+                for(; i < loaded; ++i)
+                {
+                    let div = document.createElement('div');
+                    let m = filtered[i];
+                    div.className = 'movie_div';
+                    div.innerHTML = `
+                    <div class="poster_wrap">
+                        <img src="${m.poster}"/>
+                        <div class="overlay_div">${m.overview}</div>
+                    </div>
+                    <p>${m.title}</p>
+                    <p>${m.release_date}</p>
+                    <p>★${m.vote_average}</p>
+                    `;
+                    display.appendChild(div);
+                }
+            }
+            function reset_display()
+            {
+                display.innerHTML = "";
+                loaded = 0;
+            }
+            function sort_display()
+            {
+                const checked = document.querySelector('input[name="order"]:checked');
+                const value = checked ? checked.value : null;
+                if(value == null) return;
+                let comp;
+                switch (value){
+                    case 'v_dec':
+                        comp = (a,b) => b.vote_average - a.vote_average;
+                        break;
+                    case 'v_asc':
+                        comp = (a,b) => a.vote_average - b.vote_average;
+                        break;
+                    case 'd_dec':
+                        comp = (a,b) => new Date(b.release_date) - new Date(a.release_date);
+                        break;
+                    default:
+                        comp = (a,b) => new Date(a.release_date) - new Date(b.release_date)
+                        break;
+                }
+                filtered.sort(comp);
+            }
+            fetch('./product.json')
+            .then(res => res.json())
+            .then(data => {
+                Movies = data;
+                filtered = [...Movies];
+                load_next_page();
+                window.onscroll = () => {
+                    if(window.innerHeight +window.scrollY >= document.body.offsetHeight)
+                    {
+                        load_next_page();
+                    }
+                };
+                document.querySelectorAll('input[name="order"]').forEach(radio=>{
+                    radio.addEventListener('change', (e) => {
+                        reset_display();
+                        sort_display();
+                        load_next_page();
+                    });
+                });
+                document.getElementById("filter").addEventListener("click", ()=>{
+                    const keyword = document.getElementById("keyword").value.toLowerCase();
+                    filtered = Movies.filter(m => (m.title.toLowerCase().indexOf(keyword) >= 0));
+                    reset_display();
+                    sort_display();
+                    load_next_page();
+                });
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>
